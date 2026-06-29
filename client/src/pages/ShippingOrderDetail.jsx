@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
-const API_LOGISTICS_URL = 'http://localhost:3000/api/v1/logistics';
+const API_LOGISTICS_URL = 'https://admindashboard-13rm.onrender.com/api/v1/logistics';
 
 const ShippingOrderDetail = () => {
   const { id } = useParams();

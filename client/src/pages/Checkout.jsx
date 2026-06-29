@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import { useCart } from '../context/CartContext';
 
-const API_PAYMENT_URL = 'http://localhost:3000/api/v1/payments';
+const API_PAYMENT_URL = 'https://admindashboard-13rm.onrender.com/api/v1/payments';
 
 // ─── Load Razorpay Script ─────────────────────────────────────────────────────
 const loadRazorpayScript = () =>

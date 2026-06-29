@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
-const API_LOGISTICS_URL = 'http://localhost:3000/api/v1/logistics';
+const API_LOGISTICS_URL = 'https://admindashboard-13rm.onrender.com/api/v1/logistics';
 
 const ShippingDashboard = () => {
   const navigate = useNavigate();

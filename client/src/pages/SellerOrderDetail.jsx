@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
-const API_PAYMENT_URL = 'http://localhost:3000/api/v1/payments';
+const API_PAYMENT_URL = 'https://admindashboard-13rm.onrender.com/api/v1/payments';
 
 const SellerOrderDetail = () => {
   const { id } = useParams();

@@ -19,7 +19,7 @@ const ShippingLogin = () => {
     setLoading(true);
 
     try {
-      const res = await fetch('http://localhost:3000/api/v1/logistics/shipping/login', {
+      const res = await fetch('https://admindashboard-13rm.onrender.com/api/v1/logistics/shipping/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: email.trim(), password }),
