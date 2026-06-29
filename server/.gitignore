@@ -1,4 +1,4 @@
 node_modules/
 .env
-testcreate.js
+scratch/testCreate.js
 dist/
