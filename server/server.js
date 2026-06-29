@@ -3,7 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const connectDB = require('./config/db');
-const { webhook } = require('./controllers/paymentController');
+const { webhook } = require('./controllers/paymentcontroller');
 const paymentRoutes = require('./routes/paymentRoutes');
 const logisticsRoutes = require('./routes/logisticsRoutes');
 

@@ -14,7 +14,7 @@ const {
   acceptOrder,
   rejectOrder,
   getSellerEarnings
-} = require('../controllers/paymentController');
+} = require('../controllers/paymentcontroller');
 const { protectSeller } = require('../middleware/authMiddleware');
 
 // GET /api/v1/payments/products

@@ -350,7 +350,7 @@ e-commerce/
 │
 └── server/                         # Express backend
     ├── controllers/
-    │   └── paymentController.js        # Core business logic
+    │   └── paymentcontroller.js        # Core business logic
     ├── models/
     │   ├── Order.js
     │   ├── Payment.js
