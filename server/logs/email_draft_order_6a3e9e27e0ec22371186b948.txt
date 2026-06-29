@@ -1,0 +1,13 @@
+To: customer@example.com
+Subject: Action Required: Payment Failed for Order #6a3e9e27e0ec22371186b948
+
+Dear Customer,
+
+We are writing to inform you that your payment of $299.97 for Order #6a3e9e27e0ec22371186b948 could not be completed.
+
+Reason for failure: Your card had insufficient funds.
+
+We have automatically released the reserved inventory for your items. If you still wish to complete this purchase, please visit the checkout page again or contact support.
+
+Best regards,
+Enterprise E-Commerce Billing Team

@@ -1,0 +1,18 @@
+/* Base Reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #F8F9FA;
+  color: #1F2937;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
