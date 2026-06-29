@@ -13,9 +13,13 @@ const {
   getSellerOrders,
   acceptOrder,
   rejectOrder,
-  getSellerEarnings
+  getSellerEarnings,
+  seedDatabase
 } = require('../controllers/paymentcontroller');
 const { protectSeller } = require('../middleware/authMiddleware');
+
+// GET /api/v1/payments/seed
+router.get('/seed', seedDatabase);
 
 // GET /api/v1/payments/products
 router.get('/products', getProducts);

@@ -860,6 +860,100 @@ const getOrderById = async (req, res) => {
   }
 };
 
+/**
+ * GET /api/v1/payments/seed
+ * Seed the database on production/Render dynamically
+ */
+const seedDatabase = async (req, res) => {
+  try {
+    const mongoose = require('mongoose');
+    const Seller = require('../models/Seller');
+    const Product = require('../models/Product');
+    const Order = require('../models/Order');
+    const Payment = require('../models/Payment');
+    const SellerLedger = require('../models/SellerLedger');
+    const PayoutLog = require('../models/PayoutLog');
+    const Shipment = require('../models/Shipment');
+    const ShippingPartner = require('../models/ShippingPartner');
+
+    // 1. Clear collections
+    await Seller.deleteMany({});
+    await Product.deleteMany({});
+    await Order.deleteMany({});
+    await Payment.deleteMany({});
+    await SellerLedger.deleteMany({});
+    await PayoutLog.deleteMany({});
+    await Shipment.deleteMany({});
+    await ShippingPartner.deleteMany({});
+
+    // 2. Seed shipping partner
+    await ShippingPartner.create({
+      name: 'Global Express Logistics',
+      email: 'shipping@partner.com',
+      password: 'shipping123'
+    });
+
+    // 3. Seed sellers
+    const sellers = [
+      {
+        name: 'Acme Electronics',
+        email: 'acme.payouts@example.com',
+        bankName: 'Chase Bank',
+        bankAccountNumber: 'Chase-123456789',
+        accountStatus: 'Active',
+        pendingBalance: 0,
+        availableBalance: 0,
+        totalEarnings: 0,
+      },
+      {
+        name: 'Restricted Goods Corp',
+        email: 'restricted.corp@example.com',
+        bankName: 'Wells Fargo',
+        bankAccountNumber: 'WF-987654321',
+        accountStatus: 'Restricted',
+        pendingBalance: 0,
+        availableBalance: 0,
+        totalEarnings: 0,
+      },
+    ];
+
+    const [activeSeller, restrictedSeller] = await Seller.insertMany(sellers);
+
+    // 4. Fetch from DummyJSON (uses Node 18+ global fetch)
+    const response = await fetch('https://dummyjson.com/products?limit=30');
+    if (!response.ok) {
+      throw new Error(`Failed to fetch dummy products: ${response.statusText}`);
+    }
+    const data = await response.json();
+    const dummyProducts = data.products;
+
+    const mappedProducts = dummyProducts.map((p, idx) => {
+      const objectId = p.id.toString().padStart(24, '0');
+      const priceInCents = Math.round(p.price * 100);
+      const assignedSeller = idx % 2 === 0 ? activeSeller : restrictedSeller;
+
+      return {
+        _id: new mongoose.Types.ObjectId(objectId),
+        name: p.title,
+        price: priceInCents,
+        stock: p.stock || 10,
+        description: p.description,
+        sellerId: assignedSeller._id,
+      };
+    });
+
+    await Product.insertMany(mappedProducts);
+
+    return res.status(200).json({
+      success: true,
+      message: 'Database seeded successfully on Render production!'
+    });
+  } catch (error) {
+    console.error('❌ [Seeding API Error]', error);
+    return res.status(500).json({ success: false, message: `Seeding failed: ${error.message}` });
+  }
+};
+
 module.exports = {
   checkout,
   webhook,
@@ -875,4 +969,5 @@ module.exports = {
   acceptOrder,
   rejectOrder,
   getSellerEarnings,
+  seedDatabase,
 };
