@@ -29,37 +29,8 @@ A full-stack MERN e-commerce marketplace with integrated payment processing, mul
 
 ---
 
-## 🔐 Login Credentials
-
-### 🛒 Customer (No Login Required)
-Customers browse products and checkout without an account. Order history is tracked by session.
-
----
-
-### 🏪 Seller Dashboard — `/seller/login`
-
-> **Note:** Products are alternately assigned to sellers during seeding (index 0, 2, 4... → Acme Electronics | index 1, 3, 5... → Restricted Goods Corp).
-
-| Field | Seller 1 | Seller 2 |
-|---|---|---|
-| **Name** | Acme Electronics | Restricted Goods Corp |
-| **Email** | `acme.payouts@example.com` | `restricted.corp@example.com` |
-| **Password** | `seller123` | `seller123` |
-| **Account Status** | ✅ Active | ⚠️ Restricted |
-| **Bank** | Chase Bank (`Chase-123456789`) | Wells Fargo (`WF-987654321`) |
-
-> **Tip:** To see orders in the Seller Dashboard, log in as the seller whose products were purchased.
-> Product #1 → Acme Electronics, Product #2 → Restricted Goods Corp, and so on alternately.
-
----
-
-### 🚚 Shipping Dashboard — `/shipping/login`
-
-| Field | Value |
-|---|---|
-| **Partner Name** | Global Express Logistics |
-| **Email** | `shipping@partner.com` |
-| **Password** | `shipping123` |
+## 🔐 Authentication
+This project uses JWT (JSON Web Tokens) for authenticating merchants and shipping partners. Pre-seeded sandbox accounts are loaded into the database during initial setup for evaluation and local testing.
 
 ---
 
@@ -79,16 +50,6 @@ npm install
 
 ### 2. Configure Environment
 
-The server `.env` is pre-configured for local MongoDB. Razorpay keys are included:
-
-```env
-PORT=3000
-MONGO_URI=your_mongodb_connection_string
-RAZORPAY_KEY_ID=your_razorpay_key_id
-RAZORPAY_KEY_SECRET=your_razorpay_key_secret
-```
-
-> MongoDB Atlas is also supported — replace `<db_password>` in the MONGO_URI to use cloud.
 
 ### 3. Seed the Database
 
@@ -419,20 +380,7 @@ e-commerce/
 
 This project has been developed primarily to demonstrate the implementation of secure payment processing, multi-vendor payout workflows, escrow handling, logistics integration, and end-to-end order lifecycle management. Therefore, the Product APIs currently use dummy/mock data, as the primary focus of the assignment is on Payment Gateway Integration, Seller Payout Processing, Logistics & Shipping Partner Integration, and synchronization of orders and tracking across multiple dashboards rather than building a production-ready product catalog.
 
-To simplify evaluation and testing, predefined accounts have been seeded into the database.
-
-### Seller Dashboard Accounts
-
-| Merchant Name         | Email Address                                                     | Password  | Account Status |
-| --------------------- | ----------------------------------------------------------------- | --------- | -------------- |
-| Acme Electronics      | [acme.payouts@example.com](mailto:acme.payouts@example.com)       | seller123 | Active         |
-| Restricted Goods Corp | [restricted.corp@example.com](mailto:restricted.corp@example.com) | seller123 | Restricted     |
-
-### Shipping Dashboard Account
-
-| Shipping Carrier Name    | Email Address                                       | Password    | Account Status |
-| ------------------------ | --------------------------------------------------- | ----------- | -------------- |
-| Global Express Logistics | [shipping@partner.com](mailto:shipping@partner.com) | shipping123 | Active         |
+To simplify evaluation and testing, predefined demo accounts are automatically seeded into the database. Please refer to the seed files or application database for the testing login credentials.
 
 ### Why is "Restricted Goods Corp" marked as Restricted?
 
